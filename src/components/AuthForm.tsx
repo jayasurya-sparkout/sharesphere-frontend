@@ -8,10 +8,11 @@ type AuthFormProps = {
 };
 
 export default function AuthForm({ mode }: AuthFormProps) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [mounted, setMounted] = useState(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [mounted, setMounted] = useState<boolean>(false);
 
   const isRegister = mode === "register";
 
@@ -34,6 +35,19 @@ export default function AuthForm({ mode }: AuthFormProps) {
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
+
+          {isRegister && (
+            <div>
+              <label className="block mb-1 text-gray-600">Name</label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition"
+              />
+            </div>
+          )}
+
           <div>
             <label className="block mb-1 text-gray-600">Email</label>
             <input
