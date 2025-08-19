@@ -33,7 +33,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
     }
 
     try {
-      const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login";
+      const endpoint = isRegister ? "/auth/register" : "/auth/login";
 
       const { data } = await api.post(endpoint, {
         email,
