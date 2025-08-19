@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { api } from "@/lib/api";
-import { setCookie, getCookie, deleteCookie } from "@/lib/cookies";
+import { setCookie } from "@/lib/cookies";
 
 type AuthFormProps = {
   mode: "login" | "register";
