@@ -1,4 +1,3 @@
-// components/AuthForm.tsx
 "use client";
 
 import { useState } from "react";
@@ -17,7 +16,6 @@ export default function AuthForm({ mode }: AuthFormProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: handle login/register API calls
     console.log({ email, password, confirmPassword });
   };
 
