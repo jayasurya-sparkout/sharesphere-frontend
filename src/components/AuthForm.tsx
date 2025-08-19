@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { api } from "@/lib/api";
+import { setCookie, getCookie, deleteCookie } from "@/lib/cookies";
 
 type AuthFormProps = {
   mode: "login" | "register";
@@ -13,6 +15,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [mounted, setMounted] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const isRegister = mode === "register";
 
@@ -20,9 +23,30 @@ export default function AuthForm({ mode }: AuthFormProps) {
     setMounted(true);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Submitting: ${email}`);
+    setError("");
+
+    if (isRegister && password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    try {
+      const endpoint = isRegister ? "/api/auth/register" : "/api/auth/login";
+
+      const { data } = await api.post(endpoint, {
+        email,
+        password,
+        ...(isRegister && { name }),
+      });
+
+      setCookie("userLoggedIn", data.token, 1);
+
+      window.location.href = "/";
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Something went wrong");
+    }
   };
 
   if (!mounted) return null; // prevent SSR mismatch
@@ -34,8 +58,9 @@ export default function AuthForm({ mode }: AuthFormProps) {
           {isRegister ? "Create Account" : "Welcome Back"}
         </h1>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {error && <p className="text-red-500 text-center mb-2">{error}</p>}
 
+        <form onSubmit={handleSubmit} className="space-y-4">
           {isRegister && (
             <div>
               <label className="block mb-1 text-gray-600">Name</label>
