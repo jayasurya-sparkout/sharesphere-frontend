@@ -42,7 +42,7 @@ export default function AuthForm({ mode }: AuthFormProps) {
       });
 
       setCookie("userLoggedIn", data.token, 1);
-
+      localStorage.setItem("userDetails", JSON.stringify(data));
       window.location.href = "/";
     } catch (err: any) {
       setError(err.response?.data?.message || "Something went wrong");
