@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import {
   IconChartBar,
@@ -37,7 +37,7 @@ const data = {
     },
     {
       title: "Analytics",
-      url: "#",
+      url: "analytics",
       icon: IconChartBar,
     },
     {
