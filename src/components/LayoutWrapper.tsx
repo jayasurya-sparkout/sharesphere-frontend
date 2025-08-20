@@ -30,7 +30,7 @@ export function LayoutWrapper({
     if (!mounted) return null;
 
   return (
-    <SidebarProvider
+    <SidebarProvider className="!bg-indigo-200"
           style={
             {
               "--sidebar-width": "calc(var(--spacing) * 72)",
