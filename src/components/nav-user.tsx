@@ -58,7 +58,7 @@ export function NavUser({
                   {user.email}
                 </span>
               </div>
-              <IconDotsVertical className="ml-auto size-4 text-indigo-600" />
+              <IconDotsVertical className="ml-auto size-4 text-indigo-600 cursor-pointer" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

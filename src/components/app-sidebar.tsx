@@ -8,7 +8,8 @@ import {
   IconChartBar,
   IconDashboard,
   IconInnerShadowTop,
-  IconListDetails,
+  IconTruckDelivery,
+  IconBuildingStore,
 } from "@tabler/icons-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -33,7 +34,7 @@ const data = {
     {
       title: "Products",
       url: "/products",
-      icon: IconListDetails,
+      icon: IconBuildingStore,
     },
     {
       title: "Analytics",
@@ -43,7 +44,7 @@ const data = {
     {
       title: "Orders",
       url: "/orders",
-      icon: IconChartBar,
+      icon: IconTruckDelivery,
     },
   ],
 }
@@ -57,11 +58,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   });
 
   useEffect(() => {
-    const userDetails = JSON.parse(localStorage.getItem("userDetails") || "{}");
+    const userDetails = localStorage.getItem("userDetails");
     if (userDetails) {
+      const parsedDetails = JSON.parse(userDetails);
       setUser({
-        name: userDetails.name,
-        email: userDetails.email,
+        name: parsedDetails.name,
+        email: parsedDetails.email,
       })
     };
   }, []);
