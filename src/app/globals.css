@@ -120,3 +120,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+[data-sidebar=sidebar] {
+  border-radius: 12px;
+}
